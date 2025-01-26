@@ -1,17 +1,17 @@
-def numCells(grid):
-    # Write your code here
-    res = 0
-    for i in range(len(grid)):
-        for k in range (len(grid[0])):
-            val = grid[i][k]
-            flag = 1
-            for ii in range (max(0,i-1),min(len(grid),i+2)):
-                for kk in range(max(0,k-1),min(len(grid[0]),k+2)):
-                    if (ii,kk)!=(i,k) and val<= grid[ii][kk] :
-                         flag=0
-                         break 
-                if flag == 0:
+def numCells(grid):                                                #decalration of the default method mentioned in the question 
+    # Write your code here                                           
+    res = 0                                                        #Variable for storing the number of dominant numbers in the 2D array 
+    for i in range(len(grid)):                                     # Iterative construct to iterate through rows of 2D array
+        for k in range (len(grid[0])):                             # Iterative construct to iterate through columns of 2D array
+            val = grid[i][k]                                       # Storing the number to be checked for being a "dominant number"
+            flag = 1                                               # Setting a flag, with value 1 because of initital assumption of number to be dominant
+            for ii in range (max(0,i-1),min(len(grid),i+2)):       # An iterative construct which starts with the row index of previous checked number (0 for corner case which is an exceptional case) and iterates to the last of the row(for corner case) or to the number after the number being checked (+1 for index of numberbeing checked and +2 for index of the number after the one being checked)
+                for kk in range(max(0,k-1),min(len(grid[0]),k+2)): # An iterative construct which starts with the column index of previous checked number (0 for corner case which is an exceptional case) and iterates to the last of the column(for corner case) or to the number after the number being checked (+1 for index of numberbeing checked and +2 for index of the number after the one being checked)
+                    if (ii,kk)!=(i,k) and val<= grid[ii][kk] :     # Seeing if the number stored in value is lesser than any of the numbers in the adjacent columns and rows
+                         flag=0                                    # Setting flag to zero if above condition is tru, i.e. number is found to not be dominant
+                         break                                     # Breaking so that loop can move to check the next number
+                if flag == 0:                            
                      break
             else:
-                res+=1
-    return res
+                res+=1                                             #Incrementing the result iff the flag is found to be 1, i.e. number is found to be dominant
+    return res                                                     # Returning the total number of dominant numbers
